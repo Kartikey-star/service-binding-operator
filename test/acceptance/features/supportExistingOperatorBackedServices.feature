@@ -1,5 +1,8 @@
 @olm
 @supported-operator
+@disable.arch.ppc64le
+@disable.arch.s390x
+@disable.arch.arm64
 Feature: Support a number of existing operator-backed services out of the box
 
   As a user of Service Binding operator
@@ -89,6 +92,7 @@ Feature: Support a number of existing operator-backed services out of the box
            redisSecret!
            """
 
+  @external-feedback
   Scenario: Bind test application to Postgres provisioned by Crunchy Data Postgres operator
     Given Crunchy Data Postgres operator is running
     * Generic test application is running
@@ -319,7 +323,7 @@ Feature: Support a number of existing operator-backed services out of the box
            """
     And File "/bindings/$scenario_id/password" exists in application pod
 
-  @disable-openshift-4.10
+  @external-feedback
   Scenario: Bind test application to Postgres instance provisioned by Cloud Native Postgres operator
     Given Cloud Native Postgres operator is running
     * Generic test application is running

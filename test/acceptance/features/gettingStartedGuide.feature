@@ -7,6 +7,7 @@ Feature: Getting Started Guide
     Given Namespace [TEST_NAMESPACE] is used
     * Service Binding Operator is running
 
+  @external-feedback
   Scenario: Connecting PetClinic application to PostgreSQL database
     Given PetClinic sample application is installed
     * PostgreSQL database is running
@@ -21,6 +22,9 @@ Feature: Getting Started Guide
     * Service Binding is deleted
 
   @olm
+  @disable.arch.ppc64le
+  @disable.arch.s390x
+  @disable.arch.arm64
   Scenario: Connecting PetClinic application to an Operator-backed PostgreSQL database
     Given Crunchy Data Postgres operator is running
     * PetClinic sample application is installed
