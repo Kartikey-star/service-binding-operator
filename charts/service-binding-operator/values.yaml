@@ -1,0 +1,6 @@
+image:
+  repository: quay.io/redhat-developer/servicebinding-operator
+  pullPolicy: IfNotPresent
+  tag: "31151ab8"
+runtime: "minikube"
+
