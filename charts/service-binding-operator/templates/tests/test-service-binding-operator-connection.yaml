@@ -1,0 +1,47 @@
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ .Release.Name }}-test"
+  annotations:
+    "helm.sh/hook": test-success
+spec:
+  containers:
+    - name: "{{ .Release.Name }}-test"
+      image: "quay.io/service-binding/helm-chart-test:latest"
+      imagePullPolicy: "Always"
+      env:
+        - name: TEST_ACCEPTANCE_START_SBO
+          value: remote
+        - name: TEST_ACCEPTANCE_CLI
+          {{ if eq .Values.is_openshift true }}
+          value: oc
+          {{ else }}
+          value: kubectl
+          {{ end }}
+        - name: EXTRA_BEHAVE_ARGS
+          value: -n 'SPEC Bind application to provisioned service' --tags=@smoke --tags=@spec
+        - name: SBO_REPO
+          value: https://github.com/redhat-developer/service-binding-operator.git
+        - name: SBO_REPO_COMMIT
+          value: master
+        - name: KUBECONFIG
+          value: /tmp/config
+        - name: KUBECONFIGORIGIN
+          value: /k-cfg/kubeconfig
+        - name: TEST_NAMESPACE
+          value: {{ .Release.Namespace }}
+      volumeMounts:
+      - name: k-config
+        mountPath: /k-cfg
+      command: ["/bin/sh"]
+      args:
+      - -ec
+      - |
+         cp $KUBECONFIGORIGIN $KUBECONFIG &&
+         /test-chart-entrypoint.sh
+  restartPolicy: Never
+  volumes:
+  - name: k-config
+    secret:
+      secretName: my-k-config

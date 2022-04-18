@@ -1,0 +1,8 @@
+image:
+  pullPolicy: IfNotPresent
+  tag: "31151ab8"
+is_openshift: true
+# The is_openshift value is used to set TEST_ACCEPTANCE_CLI to oc or kubectl while running helm test
+# The value is also used to provide cluster role bindings to specific service accounts
+# Please change the value to false on installing the chart on non openshift clusters
+

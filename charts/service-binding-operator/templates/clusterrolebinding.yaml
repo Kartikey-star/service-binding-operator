@@ -1,0 +1,49 @@
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: service-binding-bindablekinds-viewer-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: service-binding-bindablekinds-viewer-role
+subjects:
+- apiGroup: rbac.authorization.k8s.io
+  kind: Group
+  name: system:authenticated
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: service-binding-controller-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: service-binding-controller-role
+subjects:
+- kind: ServiceAccount
+  name: service-binding-operator
+  namespace: operators
+{{ if eq .Values.is_openshift true -}}
+- kind: ServiceAccount
+  name: service-binding-operator
+  namespace: openshift-operators
+{{else -}}
+{{end -}}
+- kind: ServiceAccount
+  name: service-binding-operator
+  namespace: service-binding-operator
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: service-binding-manager-rolebinding
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: service-binding-manager-role
+subjects:
+- kind: ServiceAccount
+  name: service-binding-operator
+  namespace: service-binding-operator
+---
