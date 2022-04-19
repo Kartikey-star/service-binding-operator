@@ -8,14 +8,10 @@
       "image": {
           "type": "object",
           "required": [
-            "repository",
             "pullPolicy",
             "tag"
           ],
           "properties": {
-            "repository": {
-              "type": "string"
-            },
             "pullPolicy": {
               "type": "string"
             },
