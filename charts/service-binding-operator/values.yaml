@@ -1,5 +1,5 @@
 image:
   pullPolicy: IfNotPresent
   tag: "31151ab8"
-runtime: "minikube"
+is_openshift: true
 

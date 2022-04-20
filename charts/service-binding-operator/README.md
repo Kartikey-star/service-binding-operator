@@ -2,6 +2,9 @@ This helm chart defines Service Binding Operator. When the chart is installed it
 
 PullPolicy
 Tag
+is_openshift
+
+The is_openshift value signifies whether installing the operator on openshift or minikube. The value is set to true for openshift and false for minikube.
 
 The chart installation will result in the creation of three Custom Resource Definitions(CRDs) :
 bindablekinds.binding.operators.coreos.com

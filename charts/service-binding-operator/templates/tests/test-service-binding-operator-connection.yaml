@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 kind: Pod
 metadata:
@@ -7,18 +8,38 @@ metadata:
 spec:
   containers:
     - name: "{{ .Release.Name }}-test"
-      image: ""
-      imagePullPolicy: "IfNotPresent"
+      image: "quay.io/kmamgain/sboat:latest"
+      imagePullPolicy: "Always"
       env:
         - name: TEST_ACCEPTANCE_START_SBO
           value: remote
         - name: TEST_ACCEPTANCE_CLI
+          {{ if eq .Values.is_openshift true }}
           value: oc
+          {{ else }}
+          value: kubectl
+          {{ end }}
         - name: EXTRA_BEHAVE_ARGS
           value: -n 'SPEC Bind application to provisioned service' --tags=@smoke --tags=@spec
-      command:
-      - /bin/bash
+        - name: SBO_REPO
+          value: https://github.com/pmacik/service-binding-operator
+        - name: SBO_REPO_COMMIT
+          value: fix/non-admin-user
+        - name: KUBECONFIG
+          value: /tmp/config
+        - name: KUBECONFIGORIGIN
+          value: /k-cfg/kubeconfig
+      volumeMounts:
+      - name: k-config
+        mountPath: /k-cfg
+      command: ["/bin/sh"]
+      args:
       - -ec
       - |
-        $(MAKE) test-acceptance
+         cp $KUBECONFIGORIGIN $KUBECONFIG &&
+         /test-acceptance.sh
   restartPolicy: Never
+  volumes:
+  - name: k-config
+    secret:
+      secretName: my-k-config
