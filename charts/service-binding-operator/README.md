@@ -4,7 +4,7 @@ PullPolicy
 Tag
 is_openshift
 
-The is_openshift value signifies whether installing the operator on openshift or minikube. The value is set to true for openshift and false for minikube.
+The is_openshift value signifies whether installing the operator on openshift or non openshift cluster. The value is set to true for openshift and false for non openshift.
 
 The chart installation will result in the creation of three Custom Resource Definitions(CRDs) :
 bindablekinds.binding.operators.coreos.com
