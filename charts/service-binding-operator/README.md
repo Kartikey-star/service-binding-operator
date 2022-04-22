@@ -1,8 +1,8 @@
 This helm chart defines Service Binding Operator. When the chart is installed it will provide the user with the oportunity to provide the image tag for service binding operator. The following are the values that can be customized when the chart is installed:
 
-PullPolicy
-Tag
-is_openshift
+.PullPolicy
+.Tag
+.is_openshift
 
 The is_openshift value signifies whether installing the operator on openshift or non openshift cluster. The value is set to true for openshift and false for non openshift.
 
