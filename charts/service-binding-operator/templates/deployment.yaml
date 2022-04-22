@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   labels:
     control-plane: service-binding-controller-manager
-    app.kubernetes.io/managed-by: Helm
   name: service-binding-operator
   namespace: service-binding-operator
 spec:

@@ -4,8 +4,6 @@ kind: Service
 metadata:
   name: service-binding-webhook-service
   namespace: service-binding-operator
-  labels:
-    app.kubernetes.io/managed-by: Helm
 spec:
   ports:
   - port: 443
