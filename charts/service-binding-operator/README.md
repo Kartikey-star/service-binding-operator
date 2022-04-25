@@ -12,5 +12,5 @@ The chart installation will result in the creation of three Custom Resource Defi
 - servicebindings.servicebinding.io
 The resources required for service binding operator will also be installed.
 
-A user can define values for the Tag and PullPolicy, from https://github.com/redhat-developer/service-binding-operator/tags to get the desired version of service binding operator.
+A user can define values for the Tag and PullPolicy. A  User can obtain tag from https://github.com/redhat-developer/service-binding-operator/tags to get the desired version of service binding operator. The image tag can be obtained from quay.io/redhat-developer/servicebinding-operator using the tag mentioned above. For example , search quay.io/redhat-developer/servicebinding-operator using 31151ab (release tag of v1.0.1) to obtain image tag  31151ab8. By default the chart points out to the latest version.
 
