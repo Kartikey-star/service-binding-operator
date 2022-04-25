@@ -28,6 +28,7 @@ Operator using the released resources:
 ....
 kubectl apply -f https://github.com/redhat-developer/service-binding-operator/releases/latest/download/release.yaml
 ....
+. Installing the Service Binding Operator using HELM chart.
 
 [#installing-the-service-binding-operator-from-the-openshift-container-platform-web-ui]
 == Installing the Service Binding Operator from the OpenShift Container Platform web UI
@@ -59,3 +60,24 @@ image:sbo_install_options.png[sbo_install_options]
 displayed with the Operator details.
 +
 image:sbo_post_install.png[sbo_post_install]
+
+[#installing-the-service-binding-operator-from-the-service-binding-operator-helm-chart]
+== Installing the service binding operator from the service binding operator helm chart
+
+You can install the Service Binding Operator using the following
+methods:
+
+. Installing the Service Binding Operator using helm
+.. You need to install cert-manager on the cluster
+[source,bash]
+...
+kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.6.0/cert-manager.yaml
+...
+.. helm repo add <url>
+.. helm search repo service-binding-operator. The chart has to be used for installation
+.. helm install [NAME] [CHART] [flags]
+... By default the chart gets installed on openshift cluster. In order to deploy the chart on non openshift cluster , set is_openshift to false
+[source,bash]
+...
+helm install service-binding-operator service-binding-operator --set is_openshift=false
+...
