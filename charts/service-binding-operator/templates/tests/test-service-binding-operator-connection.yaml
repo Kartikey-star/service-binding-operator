@@ -8,26 +8,18 @@ metadata:
 spec:
   containers:
     - name: "{{ .Release.Name }}-test"
-      image: "quay.io/service-binding/helm-test:latest"
+      image: "quay.io/service-binding/helm-chart-test:latest"
       imagePullPolicy: "Always"
       env:
-        - name: SBO_REPO
-          value: https://github.com/redhat-developer/service-binding-operator.git
-        - name: SBO_REPO_COMMIT
-          value: master
         - name: KUBECONFIG
-          value: /tmp/config
-        - name: KUBECONFIGORIGIN
           value: /k-cfg/kubeconfig
+        - name: TEST_NAMESPACE
+          value: {{.Release.Namespace}}
+        - name: KEEP_TEST_RESOURCES
+          value: "{{ .Values.keepTestResources }}"
       volumeMounts:
       - name: k-config
         mountPath: /k-cfg
-      command: ["/bin/sh"]
-      args:
-      - -ec
-      - |
-         cp $KUBECONFIGORIGIN $KUBECONFIG &&
-         /test-chart-entrypoint.sh
   restartPolicy: Never
   volumes:
   - name: k-config

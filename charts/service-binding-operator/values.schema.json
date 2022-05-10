@@ -2,8 +2,7 @@
     "$schema": "http://json-schema.org/schema#",
     "type": "object",
     "required": [
-      "image",
-      "is_openshift"
+      "image"
     ],
     "properties": {
       "image": {
@@ -17,7 +16,7 @@
             }
           }
         },
-        "is_openshift":{
+        "keepTestResources":{
           "type": "boolean"
         }
       }

@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -22,3 +23,17 @@ spec:
           - name: http
             containerPort: 8080
             protocol: TCP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: test-app
+  name: test-app
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: test-app

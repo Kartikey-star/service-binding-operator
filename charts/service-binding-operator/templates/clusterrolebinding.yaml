@@ -23,15 +23,6 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: service-binding-operator
-  namespace: operators
-{{ if eq .Values.is_openshift true -}}
-- kind: ServiceAccount
-  name: service-binding-operator
-  namespace: openshift-operators
-{{else -}}
-{{end -}}
-- kind: ServiceAccount
-  name: service-binding-operator
   namespace: service-binding-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1

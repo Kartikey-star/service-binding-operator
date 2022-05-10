@@ -25,7 +25,7 @@ spec:
         - --zap-log-level=info
         command:
         - /manager
-        image: quay.io/redhat-developer/servicebinding-operator:31151ab8
+        image: {{ .Values.image.ref }}
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         livenessProbe:
           httpGet:
