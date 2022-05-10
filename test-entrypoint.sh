@@ -7,7 +7,7 @@ kubectl apply -f ${SBO_DIR}/test-chart/sbo.yaml --wait
 InjectionReady=`kubectl get sbr test-sbo-chart-binding --output="jsonpath={.status}" | jq '.conditions[2].status'`
 Ready=`kubectl get sbr test-sbo-chart-binding --output="jsonpath={.status}" | jq '.conditions[0].status'`
 CollectionReady=`kubectl get sbr test-sbo-chart-binding --output="jsonpath={.status}" | jq '.conditions[0].status'`
-if [InjectionReady="true" && Ready=="true" && CollectionReady=="true"];then
+if [InjectionReady=="true" && Ready=="true" && CollectionReady=="true"];then
 echo "Success"
 else
 echo "Failure"

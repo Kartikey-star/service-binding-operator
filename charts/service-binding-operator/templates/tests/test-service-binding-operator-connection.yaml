@@ -8,19 +8,9 @@ metadata:
 spec:
   containers:
     - name: "{{ .Release.Name }}-test"
-      image: "quay.io/service-binding/helm-chart-test:latest"
+      image: "quay.io/service-binding/helm-test:latest"
       imagePullPolicy: "Always"
       env:
-        - name: TEST_ACCEPTANCE_START_SBO
-          value: remote
-        - name: TEST_ACCEPTANCE_CLI
-          {{ if eq .Values.is_openshift true }}
-          value: oc
-          {{ else }}
-          value: kubectl
-          {{ end }}
-        - name: EXTRA_BEHAVE_ARGS
-          value: -n 'SPEC Bind application to provisioned service' --tags=@smoke --tags=@spec
         - name: SBO_REPO
           value: https://github.com/redhat-developer/service-binding-operator.git
         - name: SBO_REPO_COMMIT
@@ -29,8 +19,6 @@ spec:
           value: /tmp/config
         - name: KUBECONFIGORIGIN
           value: /k-cfg/kubeconfig
-        - name: TEST_NAMESPACE
-          value: {{ .Release.Namespace }}
       volumeMounts:
       - name: k-config
         mountPath: /k-cfg
