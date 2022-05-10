@@ -1,0 +1,16 @@
+apiVersion: binding.operators.coreos.com/v1alpha1
+kind: ServiceBinding
+metadata:
+  name: test-sbo-chart-binding
+spec:
+  application:
+    group: apps
+    name: test-app
+    resource: deployments
+    version: v1
+  services:
+  - group: ''
+    kind: Secret
+    name: provisioned-secret-1
+    version: v1
+# end::service-binding[]
