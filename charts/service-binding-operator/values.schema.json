@@ -9,14 +9,10 @@
       "image": {
           "type": "object",
           "required": [
-            "pullPolicy",
-            "tag"
+            "pullPolicy"
           ],
           "properties": {
             "pullPolicy": {
-              "type": "string"
-            },
-            "tag": {
               "type": "string"
             }
           }
